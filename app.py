@@ -1,10 +1,12 @@
 from flask import Flask
 from bs4 import BeautifulSoup
+import os
 import requests
 
 app = Flask(__name__)
-@app.route("/")
 
+
+@app.route("/")
 def ScrapeIt():
 
     url = "https://coinmarketcap.com/currencies/bullperks/"
@@ -28,5 +30,8 @@ def ScrapeIt():
 
     return f"Circulating Supply: {circulating_supply}, Total Supply: {total_supply}"
 
-
+if __name__ == '__main__':
+    # Read port number from environment variable or use default 5000
+    port = int(os.environ.get('PORT_NUMBER', 5000))
+    app.run(debug=True, port=port)
 
